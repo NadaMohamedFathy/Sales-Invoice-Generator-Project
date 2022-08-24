@@ -382,7 +382,7 @@ public class SalesInvoiceListener implements ActionListener, ListSelectionListen
             lineDialog.setVisible(false);
             lineDialog.dispose();
             lineDialog = null;
-            int selectedRow = salesInvoiceFrame.getInvoiceHeaders().size()-1;
+            int selectedRow = salesInvoiceFrame.getInvoiceTable().getSelectedRow();
 
             if(selectedRow >= 0)
             {
@@ -390,11 +390,11 @@ public class SalesInvoiceListener implements ActionListener, ListSelectionListen
                 InvoiceHeader invoiceHeader = salesInvoiceFrame.getInvoiceHeaders().get(selectedRow);
                 invoiceHeader.getInvoiceLines().add(invoiceLine);
                 //newInvoiceHeaders.get(newInvoiceHeaders.size()-1).getInvoiceLines().add(invoiceLine);
+                salesInvoiceFrame.getInvoiceLineTable().setRowCount(invoiceHeader.getInvoiceLines().size());
                 salesInvoiceFrame.getInvoiceLineTable().fireTableDataChanged();
                 salesInvoiceFrame.getInvoiceTotalLb().setText(String.valueOf(invoiceHeader.getTotal()));
                 salesInvoiceFrame.getInvoiceHeaderTable().fireTableDataChanged();
             }
     }
-
 
 }
